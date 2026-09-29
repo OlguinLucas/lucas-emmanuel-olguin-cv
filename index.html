@@ -124,6 +124,95 @@
       .project-label { display: block; margin-bottom: 4px; color: var(--blue); font-size: .67rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
       .project-result { position: relative; z-index: 2; display: flex; align-items: end; justify-content: space-between; gap: 16px; }
       .project-result strong { font-size: 2.4rem; letter-spacing: -.07em; } .project-result span { max-width: 165px; color: var(--muted); font-size: .78rem; line-height: 1.3; text-align: right; }
+      .project-open { position: relative; z-index: 2; align-self: flex-start; margin-top: 18px; border: 1px solid var(--line); background: transparent; color: var(--white); cursor: pointer; }
+      .project-open:hover, .project-open:focus-visible { background: rgba(255,255,255,.1); }
+      .dashboard-dialog { width: min(1040px, calc(100% - 32px)); max-width: none; max-height: min(90dvh, 900px); padding: 0; overflow: auto; border: 1px solid rgba(255,255,255,.16); border-radius: 20px; color: var(--white); background: #120e0b; box-shadow: 0 30px 100px rgba(0,0,0,.65); }
+      .dashboard-dialog[open] { animation: dashboard-enter .24s ease-out; }
+      .dashboard-dialog::backdrop { background: rgba(5,4,3,.78); backdrop-filter: blur(8px); }
+      .dashboard-shell { padding: clamp(20px, 4vw, 38px); }
+      .dashboard-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+      .dashboard-heading h2 { margin: 10px 0 8px; font-size: clamp(2rem, 5vw, 3.7rem); line-height: .95; letter-spacing: -.07em; }
+      .dashboard-heading p { margin: 0; color: var(--muted); }
+      .dashboard-close { flex: 0 0 auto; min-width: 44px; min-height: 44px; border: 1px solid var(--line); border-radius: 50%; color: var(--white); background: transparent; cursor: pointer; font: inherit; font-size: 1.3rem; }
+      .demo-note { margin: 24px 0; padding: 12px 15px; border: 1px solid rgba(201,139,91,.38); border-radius: 10px; color: #e8c3a0; background: rgba(201,139,91,.08); font-size: .82rem; line-height: 1.5; }
+      .dashboard-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 18px; }
+      .dashboard-controls span { margin-right: 8px; color: var(--muted); font-size: .82rem; }
+      .period-button { min-height: 40px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 99px; color: #ded1c7; background: transparent; cursor: pointer; font: inherit; font-size: .82rem; }
+      .period-button[aria-pressed="true"] { border-color: var(--blue); color: var(--white); background: rgba(201,139,91,.18); }
+      .dashboard-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+      .dashboard-kpi, .dashboard-panel { border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.035); }
+      .dashboard-kpi { min-width: 0; padding: 16px; }
+      .dashboard-kpi span { display: block; color: var(--muted); font-size: .74rem; line-height: 1.4; }
+      .dashboard-kpi strong { display: block; margin-top: 10px; font-size: clamp(1.45rem, 3vw, 2rem); letter-spacing: -.06em; }
+      .dashboard-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 12px; margin-top: 12px; }
+      .dashboard-panel { min-width: 0; padding: 18px; }
+      .dashboard-panel h3 { margin: 0; font-size: 1rem; }
+      .dashboard-panel > p { margin: 6px 0 0; color: var(--muted); font-size: .78rem; }
+      .chart-wrap { width: 100%; margin-top: 15px; }
+      .chart-wrap svg { display: block; width: 100%; height: auto; overflow: visible; }
+      .chart-grid-line { stroke: rgba(255,255,255,.12); stroke-width: 1; }
+      .chart-bar { fill: #c98b5b; transition: height .35s ease, y .35s ease; }
+      .chart-label { fill: #b5a293; font: 11px var(--sans); }
+      .route-map { min-height: 205px; display: grid; place-items: center; }
+      .route-map svg { width: 100%; max-height: 225px; }
+      .route-line { fill: none; stroke: rgba(255,255,255,.18); stroke-width: 2; stroke-dasharray: 5 6; }
+      .route-line-active { stroke: #c98b5b; stroke-width: 3; stroke-dasharray: none; }
+      .route-point { fill: #eadfd2; stroke: #c98b5b; stroke-width: 3; }
+      .route-caption { fill: #e8c3a0; font: 11px var(--sans); }
+      .route-list { display: grid; gap: 10px; margin-top: 4px; }
+      .route-row { display: flex; justify-content: space-between; gap: 12px; color: #ded1c7; font-size: .82rem; }
+      .route-row span:last-child { color: var(--muted); text-align: right; }
+      .dashboard-footnote { margin: 15px 0 0; color: var(--muted); font-size: .72rem; line-height: 1.5; }
+      .history-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 20px 0; }
+      .history-stage { position: relative; min-width: 0; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.035); }
+      .history-stage span { display: block; color: var(--muted); font-size: .7rem; }
+      .history-stage strong { display: block; margin-top: 5px; font-size: .88rem; }
+      .history-stage.is-active { border-color: var(--blue); background: rgba(201,139,91,.1); }
+      .history-stage.is-complete strong::after { content: ' ✓'; color: var(--blue); }
+      .history-progress { height: 8px; margin: 10px 0 6px; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.1); }
+      .history-progress > span { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--blue), var(--cyan)); transition: width .3s ease; }
+      .history-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+      .history-table { width: 100%; min-width: 560px; border-collapse: collapse; text-align: left; font-size: .78rem; }
+      .history-table th, .history-table td { padding: 11px 13px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+      .history-table th { color: var(--muted); font-size: .67rem; letter-spacing: .08em; text-transform: uppercase; }
+      .history-table tbody tr { animation: row-enter .24s ease-out; }
+      .history-table tbody tr:last-child td { border-bottom: 0; }
+      .history-status { color: #e8c3a0; }
+      .history-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+      .history-actions .period-button:disabled { cursor: not-allowed; opacity: .45; }
+      .history-state { min-height: 1.3em; margin: 10px 0 0; color: var(--muted); font-size: .78rem; }
+      .automation-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 20px 0; }
+      .automation-source { min-width: 0; padding: 13px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.035); opacity: .55; transition: opacity .25s ease, border-color .25s ease, background .25s ease; }
+      .automation-source.is-active, .automation-source.is-complete { border-color: rgba(201,139,91,.55); background: rgba(201,139,91,.09); opacity: 1; }
+      .automation-source span { display: block; color: var(--muted); font-size: .66rem; }
+      .automation-source strong { display: block; margin-top: 5px; color: #e8c3a0; font-size: .78rem; overflow-wrap: anywhere; }
+      .automation-editor { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: #0b0b0d; }
+      .automation-editor-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 15px; border-bottom: 1px solid var(--line); }
+      .automation-editor-head strong { font-size: .76rem; }
+      .automation-editor-head span { color: var(--muted); font-size: .68rem; }
+      .automation-code { min-height: 310px; max-height: 410px; overflow: auto; padding: 14px 0; color: #eadfd2; font: .76rem/1.75 Consolas, 'Courier New', monospace; tab-size: 2; }
+      .automation-code-line { display: grid; grid-template-columns: 42px minmax(max-content, 1fr); padding-right: 16px; white-space: pre; }
+      .automation-code-line.is-active { background: rgba(201,139,91,.1); }
+      .automation-line-number { padding-right: 12px; color: #78685c; text-align: right; user-select: none; }
+      .automation-code-text { min-width: 0; }
+      .automation-code-text.is-typing::after { content: ''; display: inline-block; height: 1em; margin-left: 1px; border-right: 1px solid var(--cyan); vertical-align: -.15em; animation: chat-cursor .8s steps(2, start) infinite; }
+      .automation-status { min-height: 1.35em; margin: 11px 0 0; color: var(--muted); font-size: .76rem; }
+      .automation-output[hidden] { display: none; }
+      .automation-output { margin-top: 14px; animation: row-enter .3s ease-out; }
+      .automation-output-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 10px; }
+      .automation-output-head h3 { margin: 0; font-size: 1rem; }
+      .automation-output-head span { color: var(--muted); font-size: .72rem; }
+      .automation-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+      .automation-table { width: 100%; min-width: 540px; border-collapse: collapse; text-align: left; font-size: .74rem; }
+      .automation-table th, .automation-table td { padding: 10px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+      .automation-table th { color: var(--muted); font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; }
+      .automation-table tbody tr:last-child td { border-bottom: 0; }
+      .automation-result { display: flex; align-items: center; gap: 12px; margin-top: 13px; padding: 14px; border: 1px solid rgba(201,139,91,.35); border-radius: 10px; background: rgba(201,139,91,.08); }
+      .automation-result strong { flex: 0 0 auto; color: #e8c3a0; font-size: clamp(1.5rem, 4vw, 2.1rem); letter-spacing: -.06em; }
+      .automation-result span { color: #ded1c7; font-size: .76rem; line-height: 1.45; }
+      .automation-controls { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 15px; }
+      .automation-controls p { flex: 1 1 220px; margin: 0; color: var(--muted); font-size: .72rem; line-height: 1.5; }
+      .automation-replay { flex: 0 0 auto; }
       .mini-viz { position: absolute; z-index: 1; right: 24px; bottom: 92px; width: 44%; height: 120px; border: 1px solid rgba(255,255,255,.15); border-radius: 10px; padding: 14px; background: rgba(255,255,255,.04); transform: perspective(600px) rotateY(-12deg) rotateX(4deg); }
       .mini-viz .viz-line { height: 1px; background: rgba(255,255,255,.15); margin: 10px 0; } .mini-viz .viz-bars { display: flex; align-items: end; gap: 5px; height: 58px; } .mini-viz .viz-bars i { flex: 1; background: linear-gradient(var(--cyan), var(--blue)); border-radius: 3px 3px 0 0; opacity: .85; } .mini-viz .viz-bars i:nth-child(1){height:30%}.mini-viz .viz-bars i:nth-child(2){height:55%}.mini-viz .viz-bars i:nth-child(3){height:41%}.mini-viz .viz-bars i:nth-child(4){height:78%}.mini-viz .viz-bars i:nth-child(5){height:65%}.mini-viz .viz-bars i:nth-child(6){height:93%}
       .mini-route, .mini-viz { display: none; }
@@ -164,11 +253,56 @@
       .stack-section { background: #26150e; } .stack-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; } .stack-intro h2 { font-size: clamp(3rem, 6vw, 6.8rem); line-height: .88; letter-spacing: -.08em; margin: 18px 0 0; } .stack-intro p { max-width: 330px; color: var(--muted); line-height: 1.6; margin-top: 34px; } .stack-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--line); } .stack-group { padding: 22px 0 28px; border-bottom: 1px solid var(--line); } .stack-group:nth-child(odd) { margin-right: 30px; } .stack-group h3 { font-size: .76rem; color: var(--blue); letter-spacing: .12em; text-transform: uppercase; margin: 0 0 15px; } .stack-group p { margin: 0; color: #e0cdbc; line-height: 1.7; font-size: .95rem; }
 
       .ai-section { position: relative; overflow: hidden; } .ai-section::after { content: 'AI'; position: absolute; right: -2vw; top: 40px; font-size: min(35vw, 480px); line-height: .8; letter-spacing: -.1em; font-weight: 800; color: rgba(255,255,255,.025); pointer-events: none; } .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; } .ai-grid h2 { margin: 15px 0 24px; max-width: 650px; font-size: clamp(3rem, 6.5vw, 7.2rem); line-height: .87; letter-spacing: -.085em; } .ai-grid h2 em { font-family: var(--serif); font-weight: 400; } .ai-grid > div > p { max-width: 520px; color: #c2aa98; font-size: 1.05rem; line-height: 1.6; } .ai-card { min-height: 340px; border: 1px solid var(--line); border-radius: 20px; padding: 28px; background: #24150e; position: relative; overflow: hidden; } .ai-card::before { display: none; } .ai-card h3 { max-width: 300px; font-size: 2rem; line-height: .95; letter-spacing: -.07em; } .ai-card .ai-footer { position: absolute; bottom: 26px; left: 28px; right: 28px; display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 14px; color: var(--muted); font-size: .78rem; }
+      .ai-demo-card { min-height: 0; padding: clamp(18px, 3vw, 28px); }
+      .ai-demo-card h3 { max-width: 440px; margin: 18px 0 10px; font-size: clamp(1.65rem, 3vw, 2.2rem); }
+      .ai-demo-intro { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.55; }
+      .ai-demo-note { margin: 13px 0 0; color: #c2aa98; font-size: .72rem; line-height: 1.5; }
+      .ai-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+      .ai-chat-log { display: grid; gap: 14px; margin-top: 20px; }
+      .ai-chat-message { max-width: 92%; padding: 14px; border: 1px solid var(--line); border-radius: 13px; animation: row-enter .24s ease-out; }
+      .ai-chat-message[hidden], .ai-chat-typing[hidden] { display: none; }
+      .ai-chat-message-user { justify-self: end; border-color: rgba(201,139,91,.4); background: rgba(201,139,91,.12); }
+      .ai-chat-message-assistant { justify-self: start; background: rgba(255,255,255,.04); }
+      .ai-chat-author { display: block; margin-bottom: 7px; color: #e8c3a0; font-size: .67rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+      .ai-chat-file { justify-self: end; width: min(100%, 310px); padding: 12px; border: 1px solid rgba(201,139,91,.35); border-radius: 11px; background: rgba(201,139,91,.07); animation: row-enter .24s ease-out; }
+      .ai-chat-file[hidden] { display: none; }
+      .ai-chat-file-top { display: flex; align-items: center; gap: 10px; }
+      .ai-file-icon { display: grid; width: 34px; height: 38px; flex: 0 0 auto; place-items: center; border: 1px solid rgba(232,195,160,.35); border-radius: 6px; color: #e8c3a0; font-size: .58rem; font-weight: 750; }
+      .ai-chat-file-name { color: #fff; font-size: .78rem; font-weight: 650; overflow-wrap: anywhere; }
+      .ai-chat-file-meta { margin-top: 3px; color: var(--muted); font-size: .68rem; }
+      .ai-chat-file-state { display: block; margin-top: 9px; color: #e8c3a0; font-size: .67rem; }
+      .ai-chat-message p, .ai-chat-message li { margin: 0; color: #ded1c7; font-size: .82rem; line-height: 1.6; }
+      .ai-chat-message h4 { margin: 16px 0 7px; color: #e8c3a0; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; }
+      .ai-chat-message ul { display: grid; gap: 7px; margin: 0; padding-left: 19px; }
+      .ai-chat-action { margin-top: 9px !important; }
+      .ai-chat-draft { padding: 12px; border-left: 2px solid var(--blue); border-radius: 0 8px 8px 0; background: rgba(255,255,255,.04); }
+      .ai-chat-details[hidden] { display: none; }
+      .ai-chat-details > * { animation: row-enter .3s ease-out both; }
+      .ai-chat-details > *:nth-child(1) { animation-delay: .08s; }
+      .ai-chat-details > *:nth-child(2) { animation-delay: .16s; }
+      .ai-chat-details > *:nth-child(3) { animation-delay: .24s; }
+      .ai-chat-details > *:nth-child(4) { animation-delay: .32s; }
+      .ai-chat-details > *:nth-child(5) { animation-delay: .4s; }
+      .ai-chat-details > *:nth-child(6) { animation-delay: .48s; }
+      .ai-chat-details > *:nth-child(7) { animation-delay: .56s; }
+      .ai-chat-typing { display: flex; align-items: center; justify-self: start; gap: 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 13px; color: var(--muted); background: rgba(255,255,255,.04); font-size: .75rem; }
+      .ai-chat-dots { display: inline-flex; gap: 4px; }
+      .ai-chat-dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--cyan); animation: chat-dot 1s ease-in-out infinite; }
+      .ai-chat-dots i:nth-child(2) { animation-delay: .15s; }
+      .ai-chat-dots i:nth-child(3) { animation-delay: .3s; }
+      .ai-chat-cursor::after { content: ''; display: inline-block; height: 1em; margin-left: 2px; border-right: 1px solid var(--cyan); vertical-align: -.15em; animation: chat-cursor .8s steps(2, start) infinite; }
+      .ai-chat-controls { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+      .ai-chat-controls .ai-demo-note { flex: 1 1 200px; margin: 0; }
+      .ai-replay { flex: 0 0 auto; }
+      @keyframes chat-dot { 0%, 60%, 100% { opacity: .35; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-4px); } }
+      @keyframes chat-cursor { to { visibility: hidden; } }
 
       .contact { padding: 160px 0 70px; background: var(--paper); color: var(--ink); } .contact .eyebrow { color: #9c6d4e; } .contact h2 { margin: 20px 0 42px; max-width: 980px; font-size: clamp(4rem, 10vw, 11rem); line-height: 1.05; letter-spacing: -.1em; } .contact h2 em { font-family: var(--serif); font-weight: 400; } .contact-lede { max-width: 400px; margin: 0; color: #6e5c50; line-height: 1.5; } .contact-actions { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 12px; } .contact .btn-primary { background: var(--ink); color: var(--white); } .contact .btn-secondary { border-color: rgba(55,30,18,.2); color: var(--ink); } .footer { margin-top: 140px; padding-top: 20px; border-top: 1px solid rgba(55,30,18,.16); display: flex; justify-content: space-between; gap: 20px; color: #806d5e; font-size: .76rem; }
 
+      @keyframes dashboard-enter { from { opacity: 0; transform: translateY(14px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+      @keyframes row-enter { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
       @keyframes pulse { 0%,100% { transform: scale(.9); opacity: .74; } 50% { transform: scale(1.14); opacity: 1; } } @keyframes dash { to { stroke-dashoffset: -100; } } @keyframes drift { 0%,100% { transform: translate(0,0); } 50% { transform: translate(5px,-8px); } } @keyframes hoist { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-13px); } } @keyframes method-traverse { 0%, 16% { left: calc(10% - 24px); } 20%, 36% { left: calc(30% - 24px); } 40%, 56% { left: calc(50% - 24px); } 60%, 76% { left: calc(70% - 24px); } 80%, 96% { left: calc(90% - 24px); } 100% { left: calc(10% - 24px); } } @keyframes method-traverse-mobile { 0%, 16% { top: 6px; } 20%, 36% { top: 286px; } 40%, 56% { top: 566px; } 60%, 76% { top: 846px; } 80%, 96% { top: 1126px; } 100% { top: 6px; } } @keyframes method-hoist { 0%, 6% { transform: translate(-50%, 19px); } 8%, 16% { transform: translate(-50%, 0); } 18%, 26% { transform: translate(-50%, 0); } 28% { transform: translate(-50%, 19px); } 30%, 36% { transform: translate(-50%, 0); } 38%, 46% { transform: translate(-50%, 0); } 48% { transform: translate(-50%, 19px); } 50%, 56% { transform: translate(-50%, 0); } 58%, 66% { transform: translate(-50%, 0); } 68% { transform: translate(-50%, 19px); } 70%, 76% { transform: translate(-50%, 0); } 78%, 86% { transform: translate(-50%, 0); } 88% { transform: translate(-50%, 19px); } 90%, 96% { transform: translate(-50%, 0); } 98%, 100% { transform: translate(-50%, 19px); } } @keyframes method-container-shift { 0%, 8%, 18%, 100% { transform: translateY(0) scale(1); box-shadow: inset 0 4px 0 rgba(201,139,91,.42); } 10%, 12%, 14% { transform: translateY(-9px) scale(1.01); box-shadow: inset 0 4px 0 #c98b5b, 0 10px 18px rgba(55,30,18,.14); } }
-      @media (max-width: 900px) { .hero-grid, .stack-layout, .ai-grid { grid-template-columns: 1fr; gap: 55px; } .hero { padding-top: 130px; } .orbit { width: min(100%, 560px); justify-self: center; } .section-head { display: block; } .section-head p { margin-top: 22px; } .project-card:nth-child(n) { grid-column: span 12; min-height: 430px; } .method-grid { grid-template-columns: 1fr 1fr; } .method-step:last-child { grid-column: span 2; } .timeline::before { left: 86px; } .role { grid-template-columns: 86px 1fr; gap: 32px; } .role::before { left: 81px; } }
+      @media (max-width: 900px) { .hero-grid, .stack-layout, .ai-grid { grid-template-columns: minmax(0, 1fr); gap: 55px; } .hero { padding-top: 130px; } .orbit { width: min(100%, 560px); justify-self: center; } .section-head { display: block; } .section-head p { margin-top: 22px; } .project-card:nth-child(n) { grid-column: span 12; min-height: 430px; } .method-grid { grid-template-columns: 1fr 1fr; } .method-step:last-child { grid-column: span 2; } .timeline::before { left: 86px; } .role { grid-template-columns: 86px 1fr; gap: 32px; } .role::before { left: 81px; } }
       @media (max-width: 900px) { .hero-copy { padding-left: 20px; } }
       @media (max-width: 620px) { .wrap { width: min(calc(100% - 32px), var(--max)); } .navlinks a:not(.nav-cta) { display: none; } .navlinks { gap: 0; } .hero h1 { font-size: clamp(3.7rem, 18vw, 6rem); } .hero-lede { font-size: 1rem; } .orbit { width: 108%; margin-left: -4%; } .scroll-note { display: none; } .section { padding: 100px 0; } .statement { padding: 90px 0; } .statement-foot { display: block; margin-top: 52px; } .statement-foot span { display: block; margin-top: 15px; } .metrics { padding-bottom: 90px; } .metrics-grid { grid-template-columns: 1fr 1fr; } .metric { min-height: 150px; padding: 17px; } .metric strong { font-size: 3.2rem; } .metric span { font-size: .76rem; } .project-card { padding: 20px; } .project-card h3 { font-size: 2.8rem; } .mini-viz { width: 48%; right: 20px; bottom: 100px; } .role { grid-template-columns: 1fr; gap: 18px; padding-bottom: 70px; } .timeline::before { display: none; } .role::before { display: none; } .role-date { color: var(--blue); } .method-grid { grid-template-columns: 1fr; padding: 0 0 0 48px; border-left: 0; } .method-crane { inset: 0 auto 0 0; width: 42px; height: 100%; } .method-crane::before { top: 0; right: auto; bottom: 0; left: 16px; width: 2px; height: auto; } .method-support { display: none; } .method-trolley { top: 6px; left: -1px; width: 36px; animation-name: method-traverse-mobile; } .method-step:last-child { grid-column: auto; } .stack-layout, .ai-grid { gap: 42px; } .stack-list { grid-template-columns: 1fr; } .stack-group:nth-child(odd) { margin-right: 0; } .contact { padding-top: 105px; } .contact h2 { font-size: clamp(4rem, 19vw, 7.5rem); } .footer { display: block; margin-top: 90px; } .footer span { display: block; margin-top: 10px; } }
       @media (max-width: 620px) { .hero-copy { padding-left: 0; } }
@@ -180,6 +314,21 @@
         .metric strong { font-size: clamp(1.5rem, 6.2vw, 2.1rem); line-height: .95; letter-spacing: -.07em; overflow-wrap: anywhere; }
         .metric span { overflow-wrap: anywhere; }
         .project-top { flex-wrap: wrap; gap: 8px 14px; }
+        .dashboard-dialog { width: calc(100% - 16px); max-height: 94dvh; border-radius: 14px; }
+        .dashboard-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .dashboard-grid { grid-template-columns: 1fr; }
+        .dashboard-panel { padding: 14px; }
+        .dashboard-heading { gap: 12px; }
+        .dashboard-controls span { flex-basis: 100%; }
+        .history-flow { gap: 6px; }
+        .history-stage { padding: 10px 8px; }
+        .history-stage span { font-size: .64rem; }
+        .history-stage strong { font-size: .75rem; }
+        .automation-flow { gap: 6px; }
+        .automation-source { padding: 10px 8px; }
+        .automation-source span { font-size: .6rem; }
+        .automation-source strong { font-size: .7rem; }
+        .automation-code { min-height: 260px; font-size: .7rem; }
       }
       @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
     </style>
@@ -207,7 +356,7 @@
       <section class="metrics"><div class="wrap metrics-grid reveal"><div class="metric"><strong>3,5 h/día</strong><span>reducidas en consolidación manual</span></div><div class="metric"><strong>unificada</strong><span>información consolidada para analizar mejor</span></div><div class="metric"><strong>30K/día</strong><span>filas procesadas para construir histórico operativo</span></div><div class="metric"><strong>multiárea</strong><span>soluciones pensadas para distintos equipos</span></div><div class="metric"><strong>IA</strong><span>aplicada a tareas reales del negocio</span></div><div class="metric"><strong>end-to-end</strong><span>de la operación a la decisión</span></div></div></section>
 
       <section class="section dark-section" id="work"><div class="wrap"><div class="section-head reveal"><div><div class="eyebrow">02 / casos aplicados</div><h2>Problemas reales.<br />Sistemas que <em style="font-family:var(--serif);font-weight:400">responden.</em></h2></div><p>No son ejercicios de portfolio. Son soluciones nacidas de operaciones reales, diseñadas para reducir fricción y mejorar la calidad de la información.</p></div><div class="project-grid">
-        <article class="project-card reveal"><div><div class="project-top"><span>01 / automation hub</span><span>Power Query · Sheets · Apps Script</span></div><h3>Información conectada.<br />Una sola señal.</h3><div class="project-details"><p><span class="project-label">Necesidad</span>Reemplazar la consolidación manual y repetitiva de información.</p><p><span class="project-label">Qué se hizo</span>Automatización con Power Query, Sheets y Apps Script para reunir los datos y liberar tiempo para el análisis.</p></div></div><div class="project-result"><strong>−3,5 h/día</strong><span>menos tiempo en consolidación manual</span></div><div class="mini-viz"><div class="viz-line"></div><div class="viz-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="mini-crane" aria-hidden="true"><svg viewBox="0 0 200 105">
+        <article class="project-card reveal"><div><div class="project-top"><span>01 / automation hub</span><span>Power Query · Sheets · Apps Script</span></div><h3>Información conectada.<br />Una sola señal.</h3><div class="project-details"><p><span class="project-label">Necesidad</span>Reemplazar la consolidación manual y repetitiva de información.</p><p><span class="project-label">Qué se hizo</span>Automatización con Power Query, Sheets y Apps Script para reunir los datos y liberar tiempo para el análisis.</p></div></div><div><div class="project-result"><strong>−3,5 h/día</strong><span>menos tiempo en consolidación manual</span></div><button class="btn project-open" type="button" data-open-automation>Ver automatización <span>↗</span></button></div><div class="mini-viz"><div class="viz-line"></div><div class="viz-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="mini-crane" aria-hidden="true"><svg viewBox="0 0 200 105">
           <path class="crane-detail" d="M8 92H192" />
           <path class="crane-structure" d="M48 88 58 18H152L163 88M58 26H152M58 18 35 37H58M152 18 175 37H152M48 88H68M143 88H164M106 18V28H123V18" />
           <g class="crane-hoist">
@@ -216,10 +365,226 @@
             <path class="crane-rib" d="M100 55V80M109 55V80M118 55V80M127 55V80" />
           </g>
         </svg></div></article>
-        <article class="project-card reveal"><div><div class="project-top"><span>02 / visibility</span><span>BI · operations</span></div><h3>Ver el flujo antes de que se detenga.</h3><div class="project-details"><p><span class="project-label">Necesidad</span>Seguir rutas, tiempos, conexiones y desvíos sin perderse entre distintas fuentes.</p><p><span class="project-label">Qué se hizo</span>Dashboards y bases para dar visibilidad a los procesos y sus puntos críticos.</p></div></div><div class="project-result"><strong>360°</strong><span>visibilidad de procesos y puntos críticos</span></div><div class="mini-route"><b></b><b></b><b></b><b></b></div></article>
-        <article class="project-card reveal"><div><div class="project-top"><span>03 / history layer</span><span>data warehouse · snapshots</span></div><h3>La foto de hoy también necesita memoria.</h3><div class="project-details"><p><span class="project-label">Necesidad</span>Comparar cambios y entender variaciones que una foto aislada del día no muestra.</p><p><span class="project-label">Qué se hizo</span>Histórico operativo diario con procesamiento de hasta 30 mil filas por día.</p></div></div><div class="project-result"><strong>30K/día</strong><span>filas procesadas para construir histórico operativo</span></div><div class="mini-viz"><div class="viz-line"></div><div class="viz-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></article>
-        <article class="project-card reveal"><div><div class="project-top"><span>04 / applied AI</span><span>AI · automation</span></div><h3>La inteligencia también puede leer la operación.</h3><div class="project-details"><p><span class="project-label">Necesidad</span>Extraer información, mejorar la calidad de las cargas y acercar tecnología a tareas cotidianas.</p><p><span class="project-label">Qué se hizo</span>Soluciones asistidas por IA aplicadas a procesos reales del negocio.</p></div></div><div class="project-result"><strong>IA aplicada</strong><span>adopción de inteligencia artificial en procesos</span></div><div class="mini-route"><b></b><b></b><b></b><b></b></div></article>
+        <article class="project-card reveal"><div><div class="project-top"><span>02 / visibility</span><span>BI · operations</span></div><h3>Ver el flujo antes de que se detenga.</h3><div class="project-details"><p><span class="project-label">Necesidad</span>Seguir rutas, tiempos, conexiones y desvíos sin perderse entre distintas fuentes.</p><p><span class="project-label">Qué se hizo</span>Dashboards y bases para dar visibilidad a los procesos y sus puntos críticos.</p></div></div><div><div class="project-result"><strong>360°</strong><span>visibilidad de procesos y puntos críticos</span></div><button class="btn project-open" type="button" data-open-dashboard>Explorar demo TT <span>↗</span></button></div><div class="mini-route"><b></b><b></b><b></b><b></b></div></article>
+        <article class="project-card reveal"><div><div class="project-top"><span>03 / history layer</span><span>data warehouse · snapshots</span></div><h3>La foto de hoy también necesita memoria.</h3><div class="project-details"><p><span class="project-label">Necesidad</span>Comparar cambios y entender variaciones que una foto aislada del día no muestra.</p><p><span class="project-label">Qué se hizo</span>Histórico operativo diario con procesamiento de hasta 30 mil filas por día.</p></div></div><div><div class="project-result"><strong>30K/día</strong><span>filas procesadas para construir histórico operativo</span></div><button class="btn project-open" type="button" data-open-history>Ver carga de datos <span>↗</span></button></div><div class="mini-viz"><div class="viz-line"></div><div class="viz-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></article>
+        <article class="project-card reveal"><div><div class="project-top"><span>04 / applied AI</span><span>AI · automation</span></div><h3>La inteligencia también puede leer la operación.</h3><div class="project-details"><p><span class="project-label">Necesidad</span>Extraer información, mejorar la calidad de las cargas y acercar tecnología a tareas cotidianas.</p><p><span class="project-label">Qué se hizo</span>Soluciones asistidas por IA aplicadas a procesos reales del negocio.</p></div></div><div><div class="project-result"><strong>IA aplicada</strong><span>adopción de inteligencia artificial en procesos</span></div><button class="btn project-open" type="button" data-open-ai>Explorar demo IA <span>↗</span></button></div><div class="mini-route"><b></b><b></b><b></b><b></b></div></article>
       </div></div></section>
+
+      <dialog class="dashboard-dialog history-dialog" id="history-dashboard" aria-labelledby="history-title" aria-describedby="history-description">
+        <div class="dashboard-shell">
+          <div class="dashboard-heading">
+            <div>
+              <div class="eyebrow">Demo interactiva · Histórico operativo</div>
+              <h2 id="history-title">De archivos a histórico</h2>
+              <p id="history-description">Simulación de una carga diaria por lotes.</p>
+            </div>
+            <button class="dashboard-close" type="button" aria-label="Cerrar carga de datos" data-close-history>×</button>
+          </div>
+          <p class="demo-note"><strong>Datos simulados:</strong> la animación ilustra el flujo; no ejecuta una carga real ni representa información de una empresa.</p>
+          <div class="history-flow" aria-label="Etapas del flujo de datos">
+            <div class="history-stage is-active" data-history-stage="source"><span>01 · FUENTES</span><strong>Archivos diarios</strong></div>
+            <div class="history-stage" data-history-stage="transform"><span>02 · PROCESO</span><strong>Validar y anexar</strong></div>
+            <div class="history-stage" data-history-stage="archive"><span>03 · HISTÓRICO</span><strong>Base consolidada</strong></div>
+          </div>
+          <section class="dashboard-panel" aria-labelledby="history-progress-title">
+            <h3 id="history-progress-title">Lote diario de ejemplo</h3>
+            <p><span data-history-count>0</span> de 30.000 filas procesadas</p>
+            <div class="history-progress" role="progressbar" aria-label="Filas procesadas" aria-valuemin="0" aria-valuemax="30000" aria-valuenow="0" data-history-progress><span></span></div>
+            <div class="history-actions">
+              <button class="period-button" type="button" data-history-start>Iniciar carga</button>
+              <button class="period-button" type="button" data-history-pause disabled>Pausar</button>
+              <button class="period-button" type="button" data-history-reset>Reiniciar</button>
+            </div>
+            <p class="history-state" role="status" aria-live="polite" data-history-state>Lista para iniciar la simulación.</p>
+          </section>
+          <section class="dashboard-panel" aria-labelledby="history-table-title" style="margin-top: 12px">
+            <h3 id="history-table-title">Muestra de registros anexados</h3>
+            <p>La tabla conserva una muestra reciente; no renderiza las 30.000 filas.</p>
+            <div class="history-table-wrap" style="margin-top: 14px">
+              <table class="history-table">
+                <thead><tr><th>Fecha</th><th>Viaje</th><th>Origen</th><th>Destino</th><th>Estado</th></tr></thead>
+                <tbody data-history-rows>
+                  <tr><td>2026-09-28</td><td>TT-10482</td><td>Buenos Aires</td><td>Rosario</td><td class="history-status">Entregado</td></tr>
+                  <tr><td>2026-09-28</td><td>TT-10483</td><td>Córdoba</td><td>Buenos Aires</td><td class="history-status">En tránsito</td></tr>
+                  <tr><td>2026-09-28</td><td>TT-10484</td><td>Rosario</td><td>Santa Fe</td><td class="history-status">Entregado</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <p class="dashboard-footnote">Los registros son ficticios y solo representan una muestra visual. “30.000” es el volumen simulado del lote, no la cantidad de filas mostradas en pantalla.</p>
+        </div>
+      </dialog>
+
+      <dialog class="dashboard-dialog" id="automation-demo" aria-labelledby="automation-title" aria-describedby="automation-description">
+        <div class="dashboard-shell">
+          <div class="dashboard-heading">
+            <div>
+              <div class="eyebrow">Demo interactiva · Automatización</div>
+              <h2 id="automation-title">De varias fuentes a una sola señal</h2>
+              <p id="automation-description">Un ejemplo visual de cómo Apps Script puede reunir información operativa.</p>
+            </div>
+            <button class="dashboard-close" type="button" aria-label="Cerrar demo de automatización" data-close-automation>×</button>
+          </div>
+          <p class="demo-note"><strong>Ejemplo ilustrativo:</strong> las fuentes, el código y las filas son ficticios; no se ejecuta una conexión real con Google Sheets.</p>
+          <div class="automation-flow" aria-label="Fuentes de datos de ejemplo">
+            <div class="automation-source" data-automation-source><span>HOJA 01</span><strong>Viajes</strong></div>
+            <div class="automation-source" data-automation-source><span>HOJA 02</span><strong>Costos</strong></div>
+            <div class="automation-source" data-automation-source><span>HOJA 03</span><strong>Novedades</strong></div>
+          </div>
+          <div class="automation-editor">
+            <div class="automation-editor-head"><strong>consolidar.gs</strong><span>Google Apps Script · ejemplo</span></div>
+            <pre class="automation-code" aria-label="Código de ejemplo escrito progresivamente"><code data-automation-code></code></pre>
+          </div>
+          <p class="automation-status" role="status" aria-live="polite" data-automation-status>Conectando las fuentes de ejemplo…</p>
+          <section class="automation-output" data-automation-output aria-labelledby="automation-output-title" hidden>
+            <div class="automation-output-head"><h3 id="automation-output-title">Una tabla, lista para analizar</h3><span>Vista de muestra · 3 registros</span></div>
+            <div class="automation-table-wrap">
+              <table class="automation-table">
+                <thead><tr><th>Viaje</th><th>Ruta</th><th>Estado</th><th>Costo</th></tr></thead>
+                <tbody>
+                  <tr><td>TT-10482</td><td>Buenos Aires → Rosario</td><td>Entregado</td><td>$ 184.500</td></tr>
+                  <tr><td>TT-10483</td><td>Córdoba → Buenos Aires</td><td>En tránsito</td><td>$ 236.000</td></tr>
+                  <tr><td>TT-10484</td><td>Rosario → Santa Fe</td><td>Entregado</td><td>$ 92.800</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="automation-result"><strong>3,5 h/día</strong><span>Impacto reportado en el caso del portfolio: menos tiempo dedicado a consolidar información manualmente. No es un resultado calculado por esta simulación.</span></div>
+          </section>
+          <div class="automation-controls">
+            <p>El ejemplo asume que las tres hojas comparten cuatro columnas estandarizadas. La animación es ilustrativa; el código debe adaptarse a la estructura real de cada fuente.</p>
+            <button class="period-button automation-replay" type="button" data-automation-replay>Reproducir demo</button>
+          </div>
+        </div>
+      </dialog>
+
+      <dialog class="dashboard-dialog" id="transport-dashboard" aria-labelledby="dashboard-title" aria-describedby="dashboard-description">
+        <div class="dashboard-shell">
+          <div class="dashboard-heading">
+            <div>
+              <div class="eyebrow">Demo interactiva · Transporte terrestre</div>
+              <h2 id="dashboard-title">Control de operación TT</h2>
+              <p id="dashboard-description">Una vista rápida de viajes, cumplimiento y desempeño por ruta.</p>
+            </div>
+            <button class="dashboard-close" type="button" aria-label="Cerrar dashboard" data-close-dashboard>×</button>
+          </div>
+          <p class="demo-note"><strong>Datos simulados:</strong> esta demo es ilustrativa y no representa resultados reales ni información de una empresa.</p>
+          <div class="dashboard-controls" role="group" aria-label="Período del dashboard">
+            <span>Período</span>
+            <button class="period-button" type="button" data-period="7" aria-pressed="true">Últimos 7 días</button>
+            <button class="period-button" type="button" data-period="30" aria-pressed="false">Últimos 30 días</button>
+          </div>
+          <div class="dashboard-kpis" aria-live="polite">
+            <div class="dashboard-kpi"><span>Viajes completados</span><strong data-kpi="trips">128</strong></div>
+            <div class="dashboard-kpi"><span>Entregas a tiempo</span><strong data-kpi="onTime">94,5%</strong></div>
+            <div class="dashboard-kpi"><span>Costo promedio / viaje</span><strong data-kpi="cost">$ 84.200</strong></div>
+            <div class="dashboard-kpi"><span>Viajes en curso</span><strong data-kpi="active">17</strong></div>
+          </div>
+          <div class="dashboard-grid">
+            <section class="dashboard-panel" aria-labelledby="volume-title">
+              <h3 id="volume-title">Viajes completados</h3>
+              <p data-chart-caption>Por día · últimos 7 días</p>
+              <div class="chart-wrap">
+                <svg viewBox="0 0 560 220" role="img" aria-labelledby="trips-chart-title trips-chart-description">
+                  <title id="trips-chart-title">Viajes completados por período</title>
+                  <desc id="trips-chart-description">Gráfico de barras con el volumen de viajes simulados.</desc>
+                  <line class="chart-grid-line" x1="38" y1="66" x2="548" y2="66" />
+                  <line class="chart-grid-line" x1="38" y1="96" x2="548" y2="96" />
+                  <line class="chart-grid-line" x1="38" y1="126" x2="548" y2="126" />
+                  <line class="chart-grid-line" x1="38" y1="156" x2="548" y2="156" />
+                  <line class="chart-grid-line" x1="38" y1="186" x2="548" y2="186" />
+                  <text class="chart-label" x="2" y="70">40</text><text class="chart-label" x="2" y="100">30</text><text class="chart-label" x="2" y="130">20</text><text class="chart-label" x="2" y="160">10</text>
+                  <g data-chart-bars>
+                    <rect class="chart-bar" x="62" y="138" width="34" height="48" rx="5" data-value="16" />
+                    <rect class="chart-bar" x="130" y="132" width="34" height="54" rx="5" data-value="18" />
+                    <rect class="chart-bar" x="198" y="144" width="34" height="42" rx="5" data-value="14" />
+                    <rect class="chart-bar" x="266" y="123" width="34" height="63" rx="5" data-value="21" />
+                    <rect class="chart-bar" x="334" y="129" width="34" height="57" rx="5" data-value="19" />
+                    <rect class="chart-bar" x="402" y="120" width="34" height="66" rx="5" data-value="22" />
+                    <rect class="chart-bar" x="470" y="132" width="34" height="54" rx="5" data-value="18" />
+                  </g>
+                  <g data-chart-labels><text class="chart-label" x="67" y="207">Lun</text><text class="chart-label" x="137" y="207">Mar</text><text class="chart-label" x="204" y="207">Mié</text><text class="chart-label" x="274" y="207">Jue</text><text class="chart-label" x="342" y="207">Vie</text><text class="chart-label" x="411" y="207">Sáb</text><text class="chart-label" x="478" y="207">Dom</text></g>
+                </svg>
+              </div>
+            </section>
+            <section class="dashboard-panel" aria-labelledby="routes-title">
+              <h3 id="routes-title">Corredores de operación</h3>
+              <p>Rutas de ejemplo · ubicaciones ilustrativas</p>
+              <div class="route-map">
+                <svg viewBox="0 0 360 220" role="img" aria-label="Mapa esquemático de tres corredores terrestres desde Buenos Aires">
+                  <path class="route-line" d="M52 152 Q144 104 290 55" />
+                  <path class="route-line route-line-active" d="M52 152 Q170 146 300 150" />
+                  <path class="route-line" d="M52 152 Q132 185 243 199" />
+                  <circle class="route-point" cx="52" cy="152" r="7" /><circle class="route-point" cx="290" cy="55" r="6" /><circle class="route-point" cx="300" cy="150" r="6" /><circle class="route-point" cx="243" cy="199" r="6" />
+                  <text class="route-caption" x="24" y="136">Buenos Aires</text><text class="route-caption" x="265" y="39">Córdoba</text><text class="route-caption" x="275" y="135">Rosario</text><text class="route-caption" x="214" y="218">Mar del Plata</text>
+                </svg>
+              </div>
+              <div class="route-list"><div class="route-row"><span>Buenos Aires → Rosario</span><span data-route-rate>94% a tiempo</span></div><div class="route-row"><span>Buenos Aires → Córdoba</span><span data-route-rate>93% a tiempo</span></div><div class="route-row"><span>Buenos Aires → Mar del Plata</span><span data-route-rate>96% a tiempo</span></div></div>
+            </section>
+          </div>
+          <p class="dashboard-footnote">Indicadores, costos, ubicaciones y recorridos son datos inventados para mostrar una posible experiencia de análisis.</p>
+        </div>
+      </dialog>
+
+      <dialog class="dashboard-dialog" id="ai-demo-dialog" aria-labelledby="ai-demo-title" aria-describedby="ai-demo-description">
+        <div class="dashboard-shell">
+          <div class="dashboard-heading">
+            <div>
+              <div class="eyebrow">Demo interactiva · IA aplicada</div>
+              <h2 id="ai-demo-title">Del dato a la acción</h2>
+              <p id="ai-demo-description">Explorá cómo un asistente puede analizar un archivo de operación y proponer próximos pasos.</p>
+            </div>
+            <button class="dashboard-close" type="button" aria-label="Cerrar demo de IA" data-close-ai>×</button>
+          </div>
+          <div class="ai-card ai-demo-card" style="margin-top: 22px">
+            <div class="eyebrow">Conversación operativa · demo</div>
+            <h3>Del archivo a la respuesta.</h3>
+            <p class="ai-demo-intro">El archivo de muestra ya está preparado: mirá cómo se procesa y qué conclusiones puede aportar.</p>
+            <section class="ai-chat-log" role="log" aria-live="off" aria-label="Conversación simulada con el asistente">
+              <div class="ai-chat-file" data-ai-file hidden>
+                <div class="ai-chat-file-top">
+                  <span class="ai-file-icon" aria-hidden="true">CSV</span>
+                  <div><div class="ai-chat-file-name">viajes_tt_demo.csv</div><div class="ai-chat-file-meta">Datos ficticios · 8 viajes · ruta, demora y estado</div></div>
+                </div>
+                <span class="ai-chat-file-state" data-ai-file-state>Archivo listo para analizar</span>
+              </div>
+              <div class="ai-chat-typing" data-ai-reading role="status" hidden>
+                <span>Leyendo archivo y revisando registros</span><span class="ai-chat-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              </div>
+              <article class="ai-chat-message ai-chat-message-user" data-ai-user-message hidden>
+                <span class="ai-chat-author">Operación</span>
+                <p class="ai-chat-cursor" data-ai-user-text></p>
+              </article>
+              <div class="ai-chat-typing" data-ai-user-typing role="status" hidden>
+                <span>Escribiendo incidencia</span><span class="ai-chat-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              </div>
+              <div class="ai-chat-typing" data-ai-thinking role="status" hidden>
+                <span>La IA está analizando la operación</span><span class="ai-chat-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              </div>
+              <article class="ai-chat-message ai-chat-message-assistant" data-ai-answer hidden>
+                <span class="ai-chat-author">Asistente · respuesta simulada</span>
+                <p class="ai-chat-cursor" data-ai-answer-summary></p>
+                <div class="ai-chat-details" data-ai-answer-details hidden>
+                  <h4>Qué verificar</h4>
+                  <ul>
+                    <li>Consultar el último evento registrado y la hora.</li>
+                    <li>Confirmar ubicación y estado con el transportista.</li>
+                    <li>Revisar si hay una alerta de ruta antes de actualizar el ETA.</li>
+                  </ul>
+                  <h4>Próximo paso</h4>
+                  <p class="ai-chat-action ai-chat-cursor" data-ai-answer-action></p>
+                  <h4>Borrador para el equipo</h4>
+                  <p class="ai-chat-draft">El envío a Rosario presenta una demora y estamos validando su estado con el transportista. Compartiremos un horario estimado actualizado cuando quede confirmado.</p>
+                </div>
+              </article>
+            </section>
+            <p class="ai-sr-only" role="status" aria-live="polite" data-ai-announcement></p>
+            <div class="ai-chat-controls">
+              <p class="ai-demo-note">Todo está precargado y es ficticio: no hace falta subir archivos. La respuesta es una simulación, sin conexión a un modelo ni a datos reales.</p>
+              <button class="btn btn-secondary ai-replay" type="button" data-ai-replay>Repetir animación ↻</button>
+            </div>
+          </div>
+        </div>
+      </dialog>
 
       <section class="section experience" id="experience"><div class="wrap"><div class="section-head reveal"><div><div class="eyebrow">03 / recorrido</div><h2>Operación primero.<br /><em style="font-family:var(--serif);font-weight:400">Tecnología después.</em></h2></div><p>Una carrera construida desde el terreno: inventario, WMS, depósitos, transporte, costos, datos y mejora continua.</p></div><div class="timeline">
         <article class="role reveal"><div class="role-date">2025 — hoy<br />Argentina</div><div><h3>Analista de Logística</h3><div class="role-company">Industria · Supply Chain</div><p>Control de gastos logísticos, análisis de proveedores, forecast, presupuesto y reporting ejecutivo. Desarrollo de dashboards, automatizaciones y soluciones con IA aplicadas al negocio.</p><div class="role-tags"><span class="tag">Cost control</span><span class="tag">BI & automation</span><span class="tag">AI ambassador</span><span class="tag">Supply analytics</span></div></div></article>
@@ -244,6 +609,413 @@
       const counters = document.querySelectorAll('[data-count]');
       const countObserver = new IntersectionObserver((entries) => entries.forEach((entry) => { if (!entry.isIntersecting) return; const target = Number(entry.target.dataset.count); const duration = 1000; const start = performance.now(); const tick = (now) => { const progress = Math.min((now - start) / duration, 1); const eased = 1 - Math.pow(1 - progress, 3); entry.target.textContent = Math.floor(target * eased); if (progress < 1) requestAnimationFrame(tick); else entry.target.textContent = target; }; requestAnimationFrame(tick); countObserver.unobserve(entry.target); }), { threshold: .7 });
       counters.forEach((el) => countObserver.observe(el));
+      const automationDialog = document.querySelector('#automation-demo');
+      const automationTrigger = document.querySelector('[data-open-automation]');
+      const automationCode = automationDialog.querySelector('[data-automation-code]');
+      const automationStatus = automationDialog.querySelector('[data-automation-status]');
+      const automationOutput = automationDialog.querySelector('[data-automation-output]');
+      const automationSources = [...automationDialog.querySelectorAll('[data-automation-source]')];
+      const automationTimers = new Set();
+      const automationLines = [
+        'function consolidar() {',
+        '  const libro = SpreadsheetApp.getActiveSpreadsheet();',
+        '  const nombres = ["Viajes", "Costos", "Novedades"];',
+        '  const registros = nombres.flatMap(nombre => {',
+        '    const hoja = libro.getSheetByName(nombre);',
+        '    if (!hoja) throw new Error(`Falta la hoja: ${nombre}`);',
+        '    const ultimaFila = hoja.getLastRow();',
+        '    return ultimaFila < 2 ? [] :',
+        '      hoja.getRange(2, 1, ultimaFila - 1, 4).getValues();',
+        '  });',
+        '',
+        '  const destino = libro.getSheetByName("Consolidado")',
+        '    || libro.insertSheet("Consolidado");',
+        '  destino.clearContents();',
+        '  destino.getRange(1, 1, 1, 4).setValues([',
+        '    ["Viaje", "Ruta", "Estado", "Costo"]',
+        '  ]);',
+        '  if (registros.length) {',
+        '    destino.getRange(2, 1, registros.length, 4).setValues(registros);',
+        '  }',
+        '}'
+      ];
+      const automationLineElements = automationLines.map((line, index) => {
+        const row = document.createElement('span');
+        row.className = 'automation-code-line';
+        const number = document.createElement('span');
+        number.className = 'automation-line-number';
+        number.setAttribute('aria-hidden', 'true');
+        number.textContent = String(index + 1);
+        const text = document.createElement('span');
+        text.className = 'automation-code-text';
+        row.append(number, text);
+        automationCode.append(row);
+        return { row, text, line };
+      });
+      const clearAutomationTimers = () => {
+        automationTimers.forEach((timer) => window.clearTimeout(timer));
+        automationTimers.clear();
+      };
+      const scheduleAutomation = (callback, delay) => {
+        const timer = window.setTimeout(() => {
+          automationTimers.delete(timer);
+          callback();
+        }, delay);
+        automationTimers.add(timer);
+      };
+      const finishAutomation = () => {
+        automationSources.forEach((source) => source.classList.add('is-complete'));
+        automationStatus.textContent = 'Fuentes consolidadas. Esta tabla es una muestra ficticia del resultado.';
+        automationOutput.hidden = false;
+      };
+      const playAutomation = () => {
+        clearAutomationTimers();
+        automationLineElements.forEach(({ row, text }) => {
+          row.classList.remove('is-active');
+          text.classList.remove('is-typing');
+          text.textContent = '';
+        });
+        automationSources.forEach((source, index) => {
+          source.classList.toggle('is-active', index === 0);
+          source.classList.remove('is-complete');
+        });
+        automationOutput.hidden = true;
+        automationStatus.textContent = 'Conectando las fuentes de ejemplo…';
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          automationLineElements.forEach(({ text, line }) => { text.textContent = line; });
+          finishAutomation();
+          return;
+        }
+        const typeLine = (lineIndex) => {
+          if (!automationDialog.open) return;
+          if (lineIndex >= automationLineElements.length) {
+            finishAutomation();
+            return;
+          }
+          const current = automationLineElements[lineIndex];
+          current.row.classList.add('is-active');
+          current.text.classList.add('is-typing');
+          automationStatus.textContent = lineIndex < 5 ? 'Identificando las hojas y preparando la consolidación…' : 'Escribiendo la lógica de validación y unión…';
+          const typeCharacter = (characterIndex) => {
+            if (!automationDialog.open) return;
+            if (characterIndex >= current.line.length) {
+              current.text.classList.remove('is-typing');
+              current.row.classList.remove('is-active');
+              if (lineIndex === 4) automationSources[0].classList.replace('is-active', 'is-complete');
+              if (lineIndex === 8) {
+                automationSources[1].classList.add('is-complete');
+                automationSources[2].classList.add('is-active');
+              }
+              scheduleAutomation(() => typeLine(lineIndex + 1), 100);
+              return;
+            }
+            current.text.textContent += current.line[characterIndex];
+            scheduleAutomation(() => typeCharacter(characterIndex + 1), 8);
+          };
+          if (!current.line) {
+            current.text.textContent = ' ';
+            scheduleAutomation(() => typeLine(lineIndex + 1), 70);
+          } else {
+            typeCharacter(0);
+          }
+        };
+        typeLine(0);
+      };
+      automationTrigger.addEventListener('click', () => {
+        automationDialog.showModal();
+        playAutomation();
+      });
+      automationDialog.querySelector('[data-close-automation]').addEventListener('click', () => automationDialog.close());
+      automationDialog.querySelector('[data-automation-replay]').addEventListener('click', playAutomation);
+      automationDialog.addEventListener('click', (event) => {
+        if (event.target === automationDialog) automationDialog.close();
+      });
+      automationDialog.addEventListener('close', clearAutomationTimers);
+      const dashboard = document.querySelector('#transport-dashboard');
+      const dashboardTrigger = document.querySelector('[data-open-dashboard]');
+      dashboardTrigger.addEventListener('click', () => dashboard.showModal());
+      dashboard.querySelector('[data-close-dashboard]').addEventListener('click', () => dashboard.close());
+      dashboard.addEventListener('click', (event) => {
+        if (event.target === dashboard) dashboard.close();
+      });
+      const dashboardData = {
+        7: { trips: '128', onTime: '94,5%', cost: '$ 84.200', active: '17', values: [16, 18, 14, 21, 19, 22, 18], labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'], routeRates: ['94% a tiempo', '93% a tiempo', '96% a tiempo'], caption: 'Viajes por día · últimos 7 días' },
+        30: { trips: '542', onTime: '92,8%', cost: '$ 86.750', active: '23', values: [18, 19, 17, 20, 18, 16, 18], labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'], routeRates: ['92% a tiempo', '93% a tiempo', '94% a tiempo'], caption: 'Promedio diario por día de semana · últimos 30 días' }
+      };
+      dashboard.querySelectorAll('[data-period]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const data = dashboardData[button.dataset.period];
+          dashboard.querySelectorAll('[data-period]').forEach((periodButton) => {
+            periodButton.setAttribute('aria-pressed', String(periodButton === button));
+          });
+          Object.entries(data).forEach(([key, value]) => {
+            const kpi = dashboard.querySelector(`[data-kpi="${key}"]`);
+            if (kpi) kpi.textContent = value;
+          });
+          dashboard.querySelector('[data-chart-caption]').textContent = data.caption;
+          dashboard.querySelector('#trips-chart-description').textContent = `${data.caption}. Datos simulados.`;
+          dashboard.querySelectorAll('[data-chart-bars] .chart-bar').forEach((bar, index) => {
+            const height = data.values[index] * 3;
+            bar.setAttribute('height', String(height));
+            bar.setAttribute('y', String(186 - height));
+          });
+          dashboard.querySelectorAll('[data-chart-labels] .chart-label').forEach((label, index) => {
+            label.textContent = data.labels[index];
+          });
+          dashboard.querySelectorAll('[data-route-rate]').forEach((rate, index) => {
+            rate.textContent = data.routeRates[index];
+          });
+        });
+      });
+      const aiDemoDialog = document.querySelector('#ai-demo-dialog');
+      const aiDemoTrigger = document.querySelector('[data-open-ai]');
+      const aiFile = aiDemoDialog.querySelector('[data-ai-file]');
+      const aiFileState = aiDemoDialog.querySelector('[data-ai-file-state]');
+      const aiReading = aiDemoDialog.querySelector('[data-ai-reading]');
+      const aiUserMessage = aiDemoDialog.querySelector('[data-ai-user-message]');
+      const aiUserText = aiDemoDialog.querySelector('[data-ai-user-text]');
+      const aiUserTyping = aiDemoDialog.querySelector('[data-ai-user-typing]');
+      const aiThinking = aiDemoDialog.querySelector('[data-ai-thinking]');
+      const aiAnswer = aiDemoDialog.querySelector('[data-ai-answer]');
+      const aiAnswerSummary = aiDemoDialog.querySelector('[data-ai-answer-summary]');
+      const aiAnswerAction = aiDemoDialog.querySelector('[data-ai-answer-action]');
+      const aiAnswerDetails = aiDemoDialog.querySelector('[data-ai-answer-details]');
+      const aiAnnouncement = aiDemoDialog.querySelector('[data-ai-announcement]');
+      const aiAnimationCancels = new Set();
+      let aiAnimationToken = 0;
+      const aiDemoCsv = `viaje,origen,destino,demora_min,estado
+TT-2401,Buenos Aires,Rosario,240,Demorado
+TT-2402,Buenos Aires,Rosario,180,Demorado
+TT-2403,Buenos Aires,Rosario,210,Demorado
+TT-2404,Cordoba,Buenos Aires,30,Demorado
+TT-2405,Cordoba,Buenos Aires,0,Entregado
+TT-2406,Buenos Aires,Mar del Plata,0,Entregado
+TT-2407,Buenos Aires,Mar del Plata,60,Demorado
+TT-2408,Santa Fe,Rosario,0,Entregado`;
+      const [aiCsvHeader, ...aiCsvLines] = aiDemoCsv.trim().split(/\r?\n/);
+      const aiCsvColumns = aiCsvHeader.split(',');
+      const aiDemoRecords = aiCsvLines.map((line) => {
+        const values = line.split(',');
+        return Object.fromEntries(aiCsvColumns.map((column, index) => [column, values[index]]));
+      });
+      const aiDelayedRecords = aiDemoRecords.filter((record) => Number(record.demora_min) > 0);
+      const aiDelaysByDestination = aiDelayedRecords.reduce((totals, record) => {
+        const current = totals.get(record.destino) || { trips: 0, delayMinutes: 0 };
+        current.trips += 1;
+        current.delayMinutes += Number(record.demora_min);
+        totals.set(record.destino, current);
+        return totals;
+      }, new Map());
+      const aiMostDelayedRoute = [...aiDelaysByDestination.entries()].sort((left, right) => right[1].delayMinutes - left[1].delayMinutes)[0];
+      const [aiWorstDestination, aiWorstRoute] = aiMostDelayedRoute;
+      const aiAverageDelay = Math.round(aiWorstRoute.delayMinutes / aiWorstRoute.trips);
+      const formatDelay = (minutes) => `${Math.floor(minutes / 60)} h ${minutes % 60} min`;
+      const aiPrompt = `Analizá el archivo viajes_tt_demo.csv. ¿Dónde se concentran las demoras y qué conviene revisar?`;
+      const aiSummary = `Analicé ${aiDemoRecords.length} viajes ficticios: ${aiDelayedRecords.length} tienen demora. El destino con mayor demora acumulada es ${aiWorstDestination}, con ${aiWorstRoute.delayMinutes} minutos en ${aiWorstRoute.trips} viajes (promedio ${formatDelay(aiAverageDelay)}). Esto señala dónde mirar primero, pero no permite confirmar la causa.`;
+      const aiAction = `Revisar los eventos y horarios de los ${aiWorstRoute.trips} viajes a ${aiWorstDestination}, y contrastarlos con el transportista antes de atribuir la demora a una causa o cambiar la operación.`;
+      const resetAiConversation = () => {
+        aiFile.hidden = true;
+        aiFileState.textContent = 'Archivo listo para analizar';
+        aiReading.hidden = true;
+        aiUserMessage.hidden = true;
+        aiUserText.textContent = '';
+        aiUserTyping.hidden = true;
+        aiThinking.hidden = true;
+        aiAnswer.hidden = true;
+        aiAnswerSummary.textContent = '';
+        aiAnswerAction.textContent = '';
+        aiAnswerDetails.hidden = true;
+        aiAnnouncement.textContent = '';
+        aiUserText.classList.add('ai-chat-cursor');
+        aiAnswerSummary.classList.add('ai-chat-cursor');
+        aiAnswerAction.classList.add('ai-chat-cursor');
+      };
+      const cancelAiConversation = () => {
+        aiAnimationToken += 1;
+        [...aiAnimationCancels].forEach((cancel) => cancel());
+        resetAiConversation();
+      };
+      const waitForAi = (duration) => new Promise((resolve) => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          resolve();
+          return;
+        }
+        let timer;
+        const finish = () => {
+          window.clearTimeout(timer);
+          aiAnimationCancels.delete(finish);
+          resolve();
+        };
+        timer = window.setTimeout(finish, duration);
+        aiAnimationCancels.add(finish);
+      });
+      const typeAiText = async (element, text, token) => {
+        element.textContent = '';
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          element.textContent = text;
+          return;
+        }
+        for (let index = 1; index <= text.length; index += 1) {
+          if (token !== aiAnimationToken) return;
+          element.textContent = text.slice(0, index);
+          await waitForAi(12);
+        }
+        element.classList.remove('ai-chat-cursor');
+      };
+      const playAiConversation = async () => {
+        cancelAiConversation();
+        const token = aiAnimationToken;
+        aiFile.hidden = false;
+        aiReading.hidden = false;
+        aiAnnouncement.textContent = 'Se está leyendo un archivo de ejemplo precargado.';
+        await waitForAi(1000);
+        if (token !== aiAnimationToken) return;
+        aiReading.hidden = true;
+        aiFileState.textContent = `Leído y procesado · ${aiDemoRecords.length} registros`;
+        aiUserTyping.hidden = false;
+        aiAnnouncement.textContent = 'Archivo leído. Se está escribiendo una consulta basada en los registros.';
+        await waitForAi(500);
+        if (token !== aiAnimationToken) return;
+        aiUserTyping.hidden = true;
+        aiUserMessage.hidden = false;
+        await typeAiText(aiUserText, aiPrompt, token);
+        if (token !== aiAnimationToken) return;
+        aiUserText.classList.remove('ai-chat-cursor');
+        aiThinking.hidden = false;
+        aiAnnouncement.textContent = 'La consulta fue enviada. El asistente está analizando los registros.';
+        await waitForAi(1250);
+        if (token !== aiAnimationToken) return;
+        aiThinking.hidden = true;
+        aiAnswer.hidden = false;
+        aiAnnouncement.textContent = 'El asistente está respondiendo con verificaciones y próximos pasos.';
+        await typeAiText(aiAnswerSummary, aiSummary, token);
+        if (token !== aiAnimationToken) return;
+        aiAnswerSummary.classList.remove('ai-chat-cursor');
+        aiAnswerDetails.hidden = false;
+        aiDemoDialog.scrollTo({
+          top: aiDemoDialog.scrollHeight,
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+        });
+        await waitForAi(650);
+        if (token !== aiAnimationToken) return;
+        await typeAiText(aiAnswerAction, aiAction, token);
+        aiAnnouncement.textContent = 'La respuesta simulada está completa y lista para revisión.';
+      };
+      aiDemoTrigger.addEventListener('click', () => {
+        aiDemoDialog.showModal();
+        playAiConversation();
+      });
+      aiDemoDialog.querySelector('[data-close-ai]').addEventListener('click', () => aiDemoDialog.close());
+      aiDemoDialog.querySelector('[data-ai-replay]').addEventListener('click', playAiConversation);
+      aiDemoDialog.addEventListener('click', (event) => {
+        if (event.target === aiDemoDialog) aiDemoDialog.close();
+      });
+      aiDemoDialog.addEventListener('close', cancelAiConversation);
+      aiDemoDialog.addEventListener('cancel', cancelAiConversation);
+      const historyDashboard = document.querySelector('#history-dashboard');
+      const historyTrigger = document.querySelector('[data-open-history]');
+      const historyRows = historyDashboard.querySelector('[data-history-rows]');
+      const historyCount = historyDashboard.querySelector('[data-history-count]');
+      const historyProgress = historyDashboard.querySelector('[data-history-progress]');
+      const historyState = historyDashboard.querySelector('[data-history-state]');
+      const historyStart = historyDashboard.querySelector('[data-history-start]');
+      const historyPause = historyDashboard.querySelector('[data-history-pause]');
+      const initialHistoryRows = historyRows.innerHTML;
+      const sampleRecords = [
+        ['2026-09-29', 'TT-30001', 'Buenos Aires', 'Rosario', 'Entregado'],
+        ['2026-09-29', 'TT-30002', 'Córdoba', 'Buenos Aires', 'En tránsito'],
+        ['2026-09-29', 'TT-30003', 'Rosario', 'Santa Fe', 'Entregado'],
+        ['2026-09-29', 'TT-30004', 'Mendoza', 'Córdoba', 'Programado'],
+        ['2026-09-29', 'TT-30005', 'Buenos Aires', 'Mar del Plata', 'Entregado'],
+        ['2026-09-29', 'TT-30006', 'Santa Fe', 'Rosario', 'En tránsito']
+      ];
+      const historyBatchSize = 3000;
+      const historyTotal = 30000;
+      let processedRows = 0;
+      let sampleIndex = 0;
+      let historyTimer;
+      let historyRunning = false;
+      const updateHistoryStages = () => {
+        const stages = [...historyDashboard.querySelectorAll('[data-history-stage]')];
+        stages.forEach((stage, index) => {
+          stage.classList.toggle('is-active', processedRows === 0 && index === 0 || processedRows > 0 && processedRows < historyTotal && index === 1 || processedRows === historyTotal && index === 2);
+          stage.classList.toggle('is-complete', processedRows > 0 && (index === 0 || processedRows === historyTotal && index > 0));
+        });
+      };
+      const stopHistoryTimer = () => {
+        window.clearInterval(historyTimer);
+        historyTimer = undefined;
+        historyRunning = false;
+        historyPause.disabled = true;
+        historyStart.disabled = processedRows === historyTotal;
+      };
+      const appendHistorySample = () => {
+        const [date, trip, origin, destination, status] = sampleRecords[sampleIndex % sampleRecords.length];
+        sampleIndex += 1;
+        const row = document.createElement('tr');
+        [date, trip, origin, destination].forEach((value) => {
+          const cell = document.createElement('td');
+          cell.textContent = value;
+          row.append(cell);
+        });
+        const statusCell = document.createElement('td');
+        statusCell.className = 'history-status';
+        statusCell.textContent = status;
+        row.append(statusCell);
+        historyRows.append(row);
+        while (historyRows.rows.length > 8) historyRows.deleteRow(0);
+      };
+      const processHistoryBatch = () => {
+        processedRows = Math.min(processedRows + historyBatchSize, historyTotal);
+        for (let index = 0; index < 3; index += 1) appendHistorySample();
+        historyCount.textContent = processedRows.toLocaleString('es-AR');
+        historyProgress.setAttribute('aria-valuenow', String(processedRows));
+        historyProgress.firstElementChild.style.width = `${processedRows / historyTotal * 100}%`;
+        updateHistoryStages();
+        if (processedRows === historyTotal) {
+          stopHistoryTimer();
+          historyState.textContent = 'Carga simulada completada: 30.000 filas anexadas al histórico.';
+        } else {
+          historyState.textContent = `Lote en proceso: ${processedRows.toLocaleString('es-AR')} de 30.000 filas.`;
+        }
+      };
+      historyTrigger.addEventListener('click', () => historyDashboard.showModal());
+      historyDashboard.querySelector('[data-close-history]').addEventListener('click', () => historyDashboard.close());
+      historyDashboard.addEventListener('click', (event) => {
+        if (event.target === historyDashboard) historyDashboard.close();
+      });
+      historyDashboard.addEventListener('close', () => {
+        if (!historyRunning) return;
+        stopHistoryTimer();
+        historyState.textContent = 'Carga pausada al cerrar la demo. Podés continuar cuando la abras de nuevo.';
+        updateHistoryStages();
+      });
+      historyStart.addEventListener('click', () => {
+        if (processedRows === historyTotal || historyRunning) return;
+        historyRunning = true;
+        historyStart.disabled = true;
+        historyPause.disabled = false;
+        historyState.textContent = 'Iniciando carga simulada…';
+        updateHistoryStages();
+        historyTimer = window.setInterval(processHistoryBatch, 450);
+      });
+      historyPause.addEventListener('click', () => {
+        if (!historyRunning) return;
+        stopHistoryTimer();
+        historyState.textContent = `Carga pausada en ${processedRows.toLocaleString('es-AR')} de 30.000 filas.`;
+        updateHistoryStages();
+      });
+      historyDashboard.querySelector('[data-history-reset]').addEventListener('click', () => {
+        stopHistoryTimer();
+        processedRows = 0;
+        sampleIndex = 0;
+        historyCount.textContent = '0';
+        historyProgress.setAttribute('aria-valuenow', '0');
+        historyProgress.firstElementChild.style.width = '0%';
+        historyRows.innerHTML = initialHistoryRows;
+        historyState.textContent = 'Lista para iniciar la simulación.';
+        updateHistoryStages();
+      });
     </script>
   </body>
 </html>
