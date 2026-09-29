@@ -173,6 +173,14 @@
       @media (max-width: 620px) { .wrap { width: min(calc(100% - 32px), var(--max)); } .navlinks a:not(.nav-cta) { display: none; } .navlinks { gap: 0; } .hero h1 { font-size: clamp(3.7rem, 18vw, 6rem); } .hero-lede { font-size: 1rem; } .orbit { width: 108%; margin-left: -4%; } .scroll-note { display: none; } .section { padding: 100px 0; } .statement { padding: 90px 0; } .statement-foot { display: block; margin-top: 52px; } .statement-foot span { display: block; margin-top: 15px; } .metrics { padding-bottom: 90px; } .metrics-grid { grid-template-columns: 1fr 1fr; } .metric { min-height: 150px; padding: 17px; } .metric strong { font-size: 3.2rem; } .metric span { font-size: .76rem; } .project-card { padding: 20px; } .project-card h3 { font-size: 2.8rem; } .mini-viz { width: 48%; right: 20px; bottom: 100px; } .role { grid-template-columns: 1fr; gap: 18px; padding-bottom: 70px; } .timeline::before { display: none; } .role::before { display: none; } .role-date { color: var(--blue); } .method-grid { grid-template-columns: 1fr; padding: 0 0 0 48px; border-left: 0; } .method-crane { inset: 0 auto 0 0; width: 42px; height: 100%; } .method-crane::before { top: 0; right: auto; bottom: 0; left: 16px; width: 2px; height: auto; } .method-support { display: none; } .method-trolley { top: 6px; left: -1px; width: 36px; animation-name: method-traverse-mobile; } .method-step:last-child { grid-column: auto; } .stack-layout, .ai-grid { gap: 42px; } .stack-list { grid-template-columns: 1fr; } .stack-group:nth-child(odd) { margin-right: 0; } .contact { padding-top: 105px; } .contact h2 { font-size: clamp(4rem, 19vw, 7.5rem); } .footer { display: block; margin-top: 90px; } .footer span { display: block; margin-top: 10px; } }
       @media (max-width: 620px) { .hero-copy { padding-left: 0; } }
       @media (max-width: 620px) { .mini-crane { right: 14px; bottom: 105px; width: 34%; } }
+      @media (max-width: 620px) {
+        .hero h1 { font-size: clamp(2.55rem, 11.5vw, 4.2rem); line-height: .9; letter-spacing: -.075em; }
+        .metrics-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .metric { min-width: 0; }
+        .metric strong { font-size: clamp(1.5rem, 6.2vw, 2.1rem); line-height: .95; letter-spacing: -.07em; overflow-wrap: anywhere; }
+        .metric span { overflow-wrap: anywhere; }
+        .project-top { flex-wrap: wrap; gap: 8px 14px; }
+      }
       @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
     </style>
   </head>
