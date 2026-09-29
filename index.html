@@ -167,10 +167,15 @@
       .dashboard-footnote { margin: 15px 0 0; color: var(--muted); font-size: .72rem; line-height: 1.5; }
       .history-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 20px 0; }
       .history-stage { position: relative; min-width: 0; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.035); }
-      .history-stage span { display: block; color: var(--muted); font-size: .7rem; }
-      .history-stage strong { display: block; margin-top: 5px; font-size: .88rem; }
+      .history-stage span { display: block; padding-right: 24px; color: var(--muted); font-size: .7rem; }
+      .history-stage strong { display: block; margin-top: 5px; padding-right: 24px; font-size: .88rem; }
       .history-stage.is-active { border-color: var(--blue); background: rgba(201,139,91,.1); }
-      .history-stage.is-complete strong::after { content: ' ✓'; color: var(--blue); }
+      .demo-step::after, .history-stage::after, .automation-source::after { position: absolute; top: 12px; right: 12px; display: grid; width: 20px; height: 20px; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--muted); content: ''; font-size: .75rem; font-weight: 700; }
+      .demo-step[data-state="active"]::after, .history-stage.is-active::after, .automation-source.is-active::after { content: '···'; border-color: rgba(201,139,91,.7); color: #e8c3a0; letter-spacing: 1px; animation: step-pulse .9s ease-in-out infinite; }
+      .demo-step[data-state="complete"]::after, .history-stage.is-complete::after, .automation-source.is-complete::after { content: '✓'; border-color: rgba(201,139,91,.7); color: #e8c3a0; }
+      .demo-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 20px 0; }
+      .demo-step { position: relative; min-width: 0; padding: 14px 40px 14px 14px; border: 1px solid var(--line); border-radius: 10px; color: var(--muted); background: rgba(255,255,255,.035); font-size: .78rem; line-height: 1.35; transition: border-color .2s ease, color .2s ease, background .2s ease; }
+      .demo-step[data-state="active"], .demo-step[data-state="complete"] { border-color: rgba(201,139,91,.55); color: #e8c3a0; background: rgba(201,139,91,.09); }
       .history-progress { height: 8px; margin: 10px 0 6px; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.1); }
       .history-progress > span { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--blue), var(--cyan)); transition: width .3s ease; }
       .history-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
@@ -184,9 +189,9 @@
       .history-actions .period-button:disabled { cursor: not-allowed; opacity: .45; }
       .history-state { min-height: 1.3em; margin: 10px 0 0; color: var(--muted); font-size: .78rem; }
       .automation-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 20px 0; }
-      .automation-source { min-width: 0; padding: 13px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.035); opacity: .55; transition: opacity .25s ease, border-color .25s ease, background .25s ease; }
+      .automation-source { position: relative; min-width: 0; padding: 13px 40px 13px 13px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.035); opacity: .55; transition: opacity .25s ease, border-color .25s ease, background .25s ease; }
       .automation-source.is-active, .automation-source.is-complete { border-color: rgba(201,139,91,.55); background: rgba(201,139,91,.09); opacity: 1; }
-      .automation-source span { display: block; color: var(--muted); font-size: .66rem; }
+      .automation-source span { display: block; padding-right: 8px; color: var(--muted); font-size: .66rem; }
       .automation-source strong { display: block; margin-top: 5px; color: #e8c3a0; font-size: .78rem; overflow-wrap: anywhere; }
       .automation-editor { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: #0b0b0d; }
       .automation-editor-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 15px; border-bottom: 1px solid var(--line); }
@@ -298,6 +303,8 @@
       .ai-replay { flex: 0 0 auto; border-color: rgba(201,139,91,.7); color: #fff; background: rgba(201,139,91,.18); }
       @keyframes chat-dot { 0%, 60%, 100% { opacity: .35; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-4px); } }
       @keyframes chat-cursor { to { visibility: hidden; } }
+      @keyframes step-pulse { 50% { opacity: .5; } }
+      @media (prefers-reduced-motion: reduce) { .demo-step[data-state="active"]::after, .history-stage.is-active::after, .automation-source.is-active::after { animation: none; } }
 
       .contact { padding: 160px 0 70px; background: var(--paper); color: var(--ink); } .contact .eyebrow { color: #9c6d4e; } .contact h2 { margin: 20px 0 42px; max-width: 980px; font-size: clamp(4rem, 10vw, 11rem); line-height: 1.05; letter-spacing: -.1em; } .contact h2 em { font-family: var(--serif); font-weight: 400; } .contact-lede { max-width: 400px; margin: 0; color: #6e5c50; line-height: 1.5; } .contact-actions { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 12px; } .contact .btn-primary { background: var(--ink); color: var(--white); } .contact .btn-secondary { border-color: rgba(55,30,18,.2); color: var(--ink); } .footer { margin-top: 140px; padding-top: 20px; border-top: 1px solid rgba(55,30,18,.16); display: flex; justify-content: space-between; gap: 20px; color: #806d5e; font-size: .76rem; }
 
@@ -327,6 +334,12 @@
         .history-stage span { font-size: .64rem; }
         .history-stage strong { font-size: .75rem; }
         .automation-flow { gap: 6px; }
+        .demo-steps { gap: 6px; }
+        .demo-step { padding: 11px 32px 11px 9px; font-size: .7rem; }
+        .demo-step::after, .history-stage::after, .automation-source::after { top: 8px; right: 7px; width: 18px; height: 18px; }
+        .history-stage { padding: 11px 8px; }
+        .history-stage strong { padding-right: 0; font-size: .75rem; }
+        .history-stage span { padding-right: 0; font-size: .6rem; }
         .automation-source { padding: 10px 8px; }
         .automation-source span { font-size: .6rem; }
         .automation-source strong { font-size: .7rem; }
@@ -384,9 +397,9 @@
           </div>
           <p class="demo-note"><strong>Datos simulados:</strong> la animación ilustra el flujo; no ejecuta una carga real ni representa información de una empresa.</p>
           <div class="history-flow" aria-label="Etapas del flujo de datos">
-            <div class="history-stage is-active" data-history-stage="source"><span>01 · FUENTES</span><strong>Archivos diarios</strong></div>
-            <div class="history-stage" data-history-stage="transform"><span>02 · PROCESO</span><strong>Validar y anexar</strong></div>
-            <div class="history-stage" data-history-stage="archive"><span>03 · HISTÓRICO</span><strong>Base consolidada</strong></div>
+            <div class="history-stage is-active" data-history-stage="source" aria-label="Cargando archivos diarios"><span>01 · FUENTES</span><strong>Archivos diarios</strong></div>
+            <div class="history-stage" data-history-stage="transform" aria-label="Pendiente: validar y anexar"><span>02 · PROCESO</span><strong>Validar y anexar</strong></div>
+            <div class="history-stage" data-history-stage="archive" aria-label="Pendiente: base consolidada"><span>03 · HISTÓRICO</span><strong>Base consolidada</strong></div>
           </div>
           <section class="dashboard-panel" aria-labelledby="history-progress-title">
             <h3 id="history-progress-title">Lote diario de ejemplo</h3>
@@ -468,6 +481,11 @@
             <button class="dashboard-close" type="button" aria-label="Cerrar dashboard" data-close-dashboard>×</button>
           </div>
           <p class="demo-note"><strong>Datos simulados:</strong> esta demo es ilustrativa y no representa resultados reales ni información de una empresa.</p>
+          <div class="demo-steps" aria-label="Pasos de actualización del dashboard">
+            <div class="demo-step" data-demo-step aria-label="Pendiente: cargar viajes">Cargar viajes</div>
+            <div class="demo-step" data-demo-step aria-label="Pendiente: calcular indicadores">Calcular indicadores</div>
+            <div class="demo-step" data-demo-step aria-label="Pendiente: actualizar corredores">Actualizar corredores</div>
+          </div>
           <div class="dashboard-controls" role="group" aria-label="Período del dashboard">
             <span>Período</span>
             <button class="period-button" type="button" data-period="7" aria-pressed="true">Últimos 7 días</button>
@@ -539,6 +557,11 @@
             <div class="eyebrow">Conversación operativa · demo</div>
             <h3>Del archivo a la respuesta.</h3>
             <p class="ai-demo-intro">El archivo de muestra ya está preparado: mirá cómo se procesa y qué conclusiones puede aportar.</p>
+            <div class="demo-steps" aria-label="Pasos del análisis">
+              <div class="demo-step" data-ai-step aria-label="Pendiente: leer archivo">Leer archivo</div>
+              <div class="demo-step" data-ai-step aria-label="Pendiente: analizar viajes">Analizar viajes</div>
+              <div class="demo-step" data-ai-step aria-label="Pendiente: proponer acción">Proponer acción</div>
+            </div>
             <section class="ai-chat-log" role="log" aria-live="off" aria-label="Conversación simulada con el asistente">
               <div class="ai-chat-file" data-ai-file hidden>
                 <div class="ai-chat-file-top">
@@ -609,6 +632,11 @@
       const counters = document.querySelectorAll('[data-count]');
       const countObserver = new IntersectionObserver((entries) => entries.forEach((entry) => { if (!entry.isIntersecting) return; const target = Number(entry.target.dataset.count); const duration = 1000; const start = performance.now(); const tick = (now) => { const progress = Math.min((now - start) / duration, 1); const eased = 1 - Math.pow(1 - progress, 3); entry.target.textContent = Math.floor(target * eased); if (progress < 1) requestAnimationFrame(tick); else entry.target.textContent = target; }; requestAnimationFrame(tick); countObserver.unobserve(entry.target); }), { threshold: .7 });
       counters.forEach((el) => countObserver.observe(el));
+      const setDemoStep = (step, state) => {
+        const label = step.textContent.trim();
+        step.dataset.state = state;
+        step.setAttribute('aria-label', `${state === 'active' ? 'En curso' : state === 'complete' ? 'Completado' : 'Pendiente'}: ${label}`);
+      };
       const automationDialog = document.querySelector('#automation-demo');
       const automationTrigger = document.querySelector('[data-open-automation]');
       const automationCode = automationDialog.querySelector('[data-automation-code]');
@@ -664,62 +692,49 @@
         automationTimers.add(timer);
       };
       const finishAutomation = () => {
-        automationSources.forEach((source) => source.classList.add('is-complete'));
+        automationSources.forEach((source) => {
+          source.classList.remove('is-active');
+          source.classList.add('is-complete');
+          source.setAttribute('aria-label', `Leído: ${source.querySelector('strong').textContent}`);
+        });
         automationStatus.textContent = 'Fuentes consolidadas. Esta tabla es una muestra ficticia del resultado.';
         automationOutput.hidden = false;
       };
       const playAutomation = () => {
         clearAutomationTimers();
-        automationLineElements.forEach(({ row, text }) => {
+        automationLineElements.forEach(({ row, text, line }) => {
           row.classList.remove('is-active');
           text.classList.remove('is-typing');
-          text.textContent = '';
+          text.textContent = line;
         });
         automationSources.forEach((source, index) => {
           source.classList.toggle('is-active', index === 0);
           source.classList.remove('is-complete');
+          source.setAttribute('aria-label', `${index === 0 ? 'Leyendo' : 'Pendiente'}: ${source.querySelector('strong').textContent}`);
         });
         automationOutput.hidden = true;
         automationStatus.textContent = 'Conectando las fuentes de ejemplo…';
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          automationLineElements.forEach(({ text, line }) => { text.textContent = line; });
           finishAutomation();
           return;
         }
-        const typeLine = (lineIndex) => {
+        const processSource = (index) => {
           if (!automationDialog.open) return;
-          if (lineIndex >= automationLineElements.length) {
+          if (index >= automationSources.length) {
             finishAutomation();
             return;
           }
-          const current = automationLineElements[lineIndex];
-          current.row.classList.add('is-active');
-          current.text.classList.add('is-typing');
-          automationStatus.textContent = lineIndex < 5 ? 'Identificando las hojas y preparando la consolidación…' : 'Escribiendo la lógica de validación y unión…';
-          const typeCharacter = (characterIndex) => {
-            if (!automationDialog.open) return;
-            if (characterIndex >= current.line.length) {
-              current.text.classList.remove('is-typing');
-              current.row.classList.remove('is-active');
-              if (lineIndex === 4) automationSources[0].classList.replace('is-active', 'is-complete');
-              if (lineIndex === 8) {
-                automationSources[1].classList.add('is-complete');
-                automationSources[2].classList.add('is-active');
-              }
-              scheduleAutomation(() => typeLine(lineIndex + 1), 30);
-              return;
-            }
-            current.text.textContent += current.line.slice(characterIndex, characterIndex + 5);
-            scheduleAutomation(() => typeCharacter(characterIndex + 5), 12);
-          };
-          if (!current.line) {
-            current.text.textContent = ' ';
-            scheduleAutomation(() => typeLine(lineIndex + 1), 20);
-          } else {
-            typeCharacter(0);
+          automationSources[index].classList.remove('is-active');
+          automationSources[index].classList.add('is-complete');
+          automationSources[index].setAttribute('aria-label', `Leído: ${automationSources[index].querySelector('strong').textContent}`);
+          if (index + 1 < automationSources.length) {
+            automationSources[index + 1].classList.add('is-active');
+            automationSources[index + 1].setAttribute('aria-label', `Leyendo: ${automationSources[index + 1].querySelector('strong').textContent}`);
           }
+          automationStatus.textContent = `Leyendo fuente ${index + 1} de ${automationSources.length}…`;
+          scheduleAutomation(() => processSource(index + 1), 180);
         };
-        typeLine(0);
+        scheduleAutomation(() => processSource(0), 180);
       };
       automationTrigger.addEventListener('click', () => {
         automationDialog.showModal();
@@ -733,10 +748,38 @@
       automationDialog.addEventListener('close', clearAutomationTimers);
       const dashboard = document.querySelector('#transport-dashboard');
       const dashboardTrigger = document.querySelector('[data-open-dashboard]');
-      dashboardTrigger.addEventListener('click', () => dashboard.showModal());
+      const dashboardSteps = [...dashboard.querySelectorAll('[data-demo-step]')];
+      let dashboardStepTimer;
+      let dashboardStepRun = 0;
+      const runDashboardSteps = () => {
+        window.clearTimeout(dashboardStepTimer);
+        dashboardStepRun += 1;
+        const currentRun = dashboardStepRun;
+        dashboardSteps.forEach((step) => setDemoStep(step, 'waiting'));
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          dashboardSteps.forEach((step) => setDemoStep(step, 'complete'));
+          return;
+        }
+        const activateStep = (index) => {
+          if (currentRun !== dashboardStepRun || !dashboard.open) return;
+          if (index > 0) setDemoStep(dashboardSteps[index - 1], 'complete');
+          if (index >= dashboardSteps.length) return;
+          setDemoStep(dashboardSteps[index], 'active');
+          dashboardStepTimer = window.setTimeout(() => activateStep(index + 1), 120);
+        };
+        activateStep(0);
+      };
+      dashboardTrigger.addEventListener('click', () => {
+        dashboard.showModal();
+        runDashboardSteps();
+      });
       dashboard.querySelector('[data-close-dashboard]').addEventListener('click', () => dashboard.close());
       dashboard.addEventListener('click', (event) => {
         if (event.target === dashboard) dashboard.close();
+      });
+      dashboard.addEventListener('close', () => {
+        window.clearTimeout(dashboardStepTimer);
+        dashboardStepRun += 1;
       });
       const dashboardData = {
         7: { trips: '128', onTime: '94,5%', cost: '$ 84.200', active: '17', values: [16, 18, 14, 21, 19, 22, 18], labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'], routeRates: ['94% a tiempo', '93% a tiempo', '96% a tiempo'], caption: 'Viajes por día · últimos 7 días' },
@@ -765,6 +808,7 @@
           dashboard.querySelectorAll('[data-route-rate]').forEach((rate, index) => {
             rate.textContent = data.routeRates[index];
           });
+          runDashboardSteps();
         });
       });
       const aiDemoDialog = document.querySelector('#ai-demo-dialog');
@@ -781,6 +825,7 @@
       const aiAnswerAction = aiDemoDialog.querySelector('[data-ai-answer-action]');
       const aiAnswerDetails = aiDemoDialog.querySelector('[data-ai-answer-details]');
       const aiAnnouncement = aiDemoDialog.querySelector('[data-ai-announcement]');
+      const aiSteps = [...aiDemoDialog.querySelectorAll('[data-ai-step]')];
       const aiAnimationCancels = new Set();
       let aiAnimationToken = 0;
       const aiDemoCsv = `viaje,origen,destino,demora_min,estado
@@ -814,6 +859,7 @@ TT-2408,Santa Fe,Rosario,0,Entregado`;
       const aiSummary = `Analicé ${aiDemoRecords.length} viajes ficticios: ${aiDelayedRecords.length} tienen demora. El destino con mayor demora acumulada es ${aiWorstDestination}, con ${aiWorstRoute.delayMinutes} minutos en ${aiWorstRoute.trips} viajes (promedio ${formatDelay(aiAverageDelay)}). Esto señala dónde mirar primero, pero no permite confirmar la causa.`;
       const aiAction = `Revisar los eventos y horarios de los ${aiWorstRoute.trips} viajes a ${aiWorstDestination}, y contrastarlos con el transportista antes de atribuir la demora a una causa o cambiar la operación.`;
       const resetAiConversation = () => {
+        aiSteps.forEach((step) => setDemoStep(step, 'waiting'));
         aiFile.hidden = true;
         aiFileState.textContent = 'Archivo listo para analizar';
         aiReading.hidden = true;
@@ -868,11 +914,14 @@ TT-2408,Santa Fe,Rosario,0,Entregado`;
         const token = aiAnimationToken;
         aiFile.hidden = false;
         aiReading.hidden = false;
+        setDemoStep(aiSteps[0], 'active');
         aiAnnouncement.textContent = 'Se está leyendo un archivo de ejemplo precargado.';
         await waitForAi(300);
         if (token !== aiAnimationToken) return;
         aiReading.hidden = true;
         aiFileState.textContent = `Leído y procesado · ${aiDemoRecords.length} registros`;
+        setDemoStep(aiSteps[0], 'complete');
+        setDemoStep(aiSteps[1], 'active');
         aiUserTyping.hidden = false;
         aiAnnouncement.textContent = 'Archivo leído. Se está escribiendo una consulta basada en los registros.';
         await waitForAi(160);
@@ -888,6 +937,8 @@ TT-2408,Santa Fe,Rosario,0,Entregado`;
         if (token !== aiAnimationToken) return;
         aiThinking.hidden = true;
         aiAnswer.hidden = false;
+        setDemoStep(aiSteps[1], 'complete');
+        setDemoStep(aiSteps[2], 'active');
         aiAnnouncement.textContent = 'El asistente está respondiendo con verificaciones y próximos pasos.';
         await typeAiText(aiAnswerSummary, aiSummary, token);
         if (token !== aiAnimationToken) return;
@@ -900,6 +951,8 @@ TT-2408,Santa Fe,Rosario,0,Entregado`;
         await waitForAi(180);
         if (token !== aiAnimationToken) return;
         await typeAiText(aiAnswerAction, aiAction, token);
+        if (token !== aiAnimationToken) return;
+        setDemoStep(aiSteps[2], 'complete');
         aiAnnouncement.textContent = 'La respuesta simulada está completa y lista para revisión.';
       };
       aiDemoTrigger.addEventListener('click', () => {
@@ -936,9 +989,19 @@ TT-2408,Santa Fe,Rosario,0,Entregado`;
       let historyRunning = false;
       const updateHistoryStages = () => {
         const stages = [...historyDashboard.querySelectorAll('[data-history-stage]')];
+        const sourceComplete = processedRows > 0;
+        const archiveActive = processedRows >= historyTotal - historyBatchSize && processedRows < historyTotal;
+        const transformComplete = processedRows >= historyTotal - historyBatchSize;
         stages.forEach((stage, index) => {
-          stage.classList.toggle('is-active', processedRows === 0 && index === 0 || processedRows > 0 && processedRows < historyTotal && index === 1 || processedRows === historyTotal && index === 2);
-          stage.classList.toggle('is-complete', processedRows > 0 && (index === 0 || processedRows === historyTotal && index > 0));
+          const active = processedRows === 0 && index === 0
+            || processedRows > 0 && processedRows < historyTotal && index === (archiveActive ? 2 : 1);
+          const complete = index === 0 && sourceComplete
+            || index === 1 && transformComplete
+            || index === 2 && processedRows === historyTotal;
+          stage.classList.toggle('is-active', active);
+          stage.classList.toggle('is-complete', complete);
+          const action = stage.querySelector('strong').textContent;
+          stage.setAttribute('aria-label', `${active ? 'En curso' : complete ? 'Completado' : 'Pendiente'}: ${action}`);
         });
       };
       const stopHistoryTimer = () => {
