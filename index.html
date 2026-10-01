@@ -83,6 +83,10 @@
       .editorial-visual svg { opacity: .8; }
       .editorial-visual .route { stroke-dasharray: none; stroke-width: .16; stroke: rgba(255,255,255,.35); }
       .editorial-visual .route.hot { stroke: var(--blue); stroke-width: .22; stroke-dasharray: 9 5; animation: dash 16s linear infinite; }
+      .editorial-core { position: absolute; inset: 39%; border: 1px solid rgba(232,195,160,.42); border-radius: 50%; box-shadow: 0 0 0 14px rgba(201,139,91,.04), 0 0 50px rgba(201,139,91,.16); }
+      .editorial-core::before, .editorial-core::after { content: ''; position: absolute; background: var(--blue); }
+      .editorial-core::before { width: 5px; height: 5px; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 18px 3px rgba(201,139,91,.75); }
+      .editorial-core::after { width: 180%; height: 1px; top: 50%; left: -40%; opacity: .22; }
       .crane-structure { fill: none; stroke: rgba(255,255,255,.52); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
       .crane-detail { fill: none; stroke: rgba(255,255,255,.24); stroke-width: 1.2; }
       .crane-container { fill: rgba(201,139,91,.78); stroke: #e8c3a0; stroke-width: 1.5; }
@@ -93,10 +97,12 @@
       .mini-crane .crane-structure { stroke-width: 2.2; }
       .mini-crane .crane-container { stroke-width: 1.4; }
       .mini-crane .crane-hoist { animation-duration: 5.6s; }
-      .editorial-word { position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font-size: clamp(4rem, 10vw, 8rem); font-weight: 650; letter-spacing: -.12em; line-height: .8; transform: rotate(-8deg); }
+      .editorial-word { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; color: #fff; font-size: clamp(4rem, 10vw, 8rem); font-weight: 650; letter-spacing: -.12em; line-height: .8; transform: rotate(-8deg); text-shadow: 0 10px 35px rgba(0,0,0,.28); }
       .editorial-word::first-letter { color: var(--blue); }
-      .editorial-caption { position: absolute; left: 13%; bottom: 18%; color: rgba(255,255,255,.58); font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; }
+      .editorial-caption { position: absolute; left: 13%; bottom: 18%; color: rgba(255,255,255,.68); font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; }
       .editorial-index { position: absolute; right: 17%; top: 18%; color: rgba(255,255,255,.5); font-family: var(--serif); font-size: 1.2rem; }
+      .editorial-meta { position: absolute; right: 13%; bottom: 18%; display: grid; gap: 5px; color: rgba(255,255,255,.42); font-size: .58rem; letter-spacing: .14em; text-align: right; text-transform: uppercase; }
+      .editorial-meta span:first-child { color: var(--blue); }
 
       .statement { padding: 110px 0 140px; background: var(--paper); color: var(--ink); }
       .statement .eyebrow { color: #9c6d4e; } .statement h2 { margin: 22px 0 0; max-width: 950px; font-size: clamp(3rem, 7vw, 8rem); line-height: .91; letter-spacing: -.085em; font-weight: 650; }
@@ -361,7 +367,7 @@
           </div>
           <div class="orbit editorial-visual reveal" aria-label="Composición abstracta sobre flujo, datos y decisiones">
             <svg viewBox="0 0 100 100" aria-hidden="true"><path class="route" d="M10 50C25 12 70 5 91 43C100 59 75 94 42 87C22 83 3 69 10 50Z"/><path class="route" d="M15 70C33 25 62 22 89 50C71 85 43 90 15 70Z"/><path class="route hot" d="M13 31C36 38 48 55 73 69C80 73 83 68 89 57"/><path class="route hot" d="M18 75C32 68 45 50 55 30C59 23 66 17 79 14"/></svg>
-            <div class="editorial-word">flow</div><div class="editorial-caption">operation / data / clarity</div><div class="editorial-index">01—07</div>
+            <div class="editorial-core" aria-hidden="true"></div><div class="editorial-word">flow</div><div class="editorial-caption">operation / data / decision</div><div class="editorial-index">01—07</div><div class="editorial-meta"><span>flow system</span><span>supply chain / data</span></div>
           </div>
         </div><div class="wrap scroll-note">scroll to explore</div>
       </section>
@@ -621,7 +627,7 @@
 
       <section class="section ai-section"><div class="wrap ai-grid"><div class="reveal"><div class="eyebrow">06 / AI ambassador</div><h2>No solo uso IA.<br />Ayudo a que <em>otros</em> la usen.</h2><p>En mi rol actual, acompaño la adopción de herramientas de inteligencia artificial mediante casos reales, capacitaciones y soluciones aplicadas al trabajo diario.</p></div><div class="ai-card reveal"><div class="eyebrow">practical intelligence</div><h3>La tecnología importa cuando se vuelve parte del trabajo.</h3><div class="ai-footer"><span>casos reales · capacitación · adopción</span><span>2026</span></div></div></div></section>
 
-      <section class="contact"><div class="wrap"><div class="eyebrow reveal">07 / próximo movimiento</div><h2 class="reveal">¿Hacemos<br /><em>visible</em> lo que sigue?</h2><p class="contact-lede reveal">Me interesan los desafíos donde Supply Chain, datos y tecnología se encuentran.</p><div class="contact-actions reveal"><a class="btn btn-primary" href="mailto:lucasemmanuelolguin@gmail.com">Escribirme <span>↗</span></a><a class="btn btn-secondary" href="https://www.linkedin.com/in/lucas-olguin" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a><a class="btn btn-secondary" href="./CV_Lucas_Olguin.pdf" download>Descargar CV <span>↓</span></a></div><div class="footer"><span>Lucas Emmanuel Olguin · CABA, Argentina</span><span>Supply Chain · Data · Automation · AI</span></div></div></section>
+      <section class="contact" id="contact"><div class="wrap"><div class="eyebrow reveal">07 / próximo movimiento</div><h2 class="reveal">¿Hacemos<br /><em>visible</em> lo que sigue?</h2><p class="contact-lede reveal">Me interesan los desafíos donde Supply Chain, datos y tecnología se encuentran.</p><div class="contact-actions reveal"><a class="btn btn-primary" href="mailto:lucasemmanuelolguin@gmail.com">Escribirme <span>↗</span></a><a class="btn btn-secondary" href="https://www.linkedin.com/in/lucas-olguin" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a><a class="btn btn-secondary" href="./CV_Lucas_Olguin.pdf" download>Descargar CV <span>↓</span></a></div><div class="footer"><span>Lucas Emmanuel Olguin · CABA, Argentina</span><span>Supply Chain · Data · Automation · AI</span></div></div></section>
     </main>
     <script>
       const root = document.documentElement;
